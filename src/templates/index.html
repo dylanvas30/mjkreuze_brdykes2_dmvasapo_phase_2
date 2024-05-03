@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shark Attack Data Visualization</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script> <!-- for plotly (interactive graphs) -->
+</head>
+<body>
+    <header>
+        <h1>Shark Attack Data Visualization</h1>
+    </header>
+
+    <div class="container">
+        <div class="sidebar">
+            <label for="graph-select">Select a graph:</label>
+            <select id="graph-select">
+                <option value="species_attacks">Attacks by Species</option>
+                <option value="country_attacks">Attacks by Country</option>
+                <option value="activity_attacks">Attacks by Activity</option>
+                <option value="fatal_attacks">Fatality Rate</option>
+                <option value="age_distribution">Age Distribution of Attacks</option>
+                <option value="monthly_distribution">Monthly Distribution</option>
+                <option value="time_of_day_distribution">Time of Day Distribution</option>
+                <option value="shark_linear_regression">Age of Victims Over Time</option>
+            </select>
+            <form id="upload-form" enctype="multipart/form-data" action="/upload" method="post">
+                <label for="file">Upload CSV file:</label>
+                <input type="file" id="file" name="file">
+                <button type="submit">Upload</button>
+            </form>
+
+            <form id="add-data-form" action="/upload" method="post">
+                <h3>Add New Shark Attack Data:</h3>
+                <label for="year">Year:</label>
+                <input type="text" id="year" name="year"><br><br>
+            
+                <label for="type">Type:</label>
+                <select id="type" name="type">
+                    <option value="Y">Unprovoked</option>
+                    <option value="N">Provoked</option>
+                </select><br><br>
+            
+                <label for="country">Country:</label>
+                <input type="text" id="country" name="country"><br><br>
+            
+                <label for="area">Area:</label>
+                <input type="text" id="area" name="area"><br><br>
+            
+                <label for="location">Location:</label>
+                <input type="text" id="location" name="location"><br><br>
+            
+                <label for="activity">Activity:</label>
+                <input type="text" id="activity" name="activity"><br><br>
+            
+                <label for="sex">Sex:</label>
+                <select id="sex" name="sex">
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
+                </select><br><br>
+            
+                <label for="age">Age:</label>
+                <input type="text" id="age" name="age"><br><br>
+            
+                <label for="injury">Injury:</label>
+                <input type="text" id="injury" name="injury"><br><br>
+            
+                <label for="fatal">Fatal(Y/N):</label>
+                <select id="fatal" name="fatal">
+                    <option value="Y">Yes</option>
+                    <option value="N">No</option>
+                </select><br><br>
+            
+                <label for="time">Time:</label>
+                <h5>Input example: 13h45, or 7h15</h5>
+                <input type="text" id="time" name="time"><br><br>
+            
+                <label for="species">Species:</label>
+                <input type="text" id="species" name="species"><br><br>
+            
+                <label for="month">Month:</label>
+                <select id="month" name="month">
+                    <option value="1">January</option>
+                    <option value="2">February</option>
+                    <option value="3">March</option>
+                    <option value="4">April</option>
+                    <option value="5">May</option>
+                    <option value="6">June</option>
+                    <option value="7">July</option>
+                    <option value="8">August</option>
+                    <option value="9">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                </select><br><br>
+            
+                <label for="day">Day:</label>
+                <select id="day" name="day">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                    <option value="24">24</option>
+                    <option value="25">25</option>
+                    <option value="26">26</option>
+                    <option value="27">27</option>
+                    <option value="28">28</option>
+                    <option value="29">29</option>
+                    <option value="30">30</option>
+                    <option value="31">31</option>
+                </select><br><br>
+            
+                <input type="submit" value="Submit">
+            </form>
+            
+        </div>
+
+        <div id="graph-container" class="content">
+            <!-- Graph displayed here -->
+            {% block graph %}
+            {% endblock %}
+        </div>
+        <img src="../static/scaryshark.gif" alt="shark!!!!" height="400" width="400">
+
+    </div>
+    <div id="summary-container" class="summary">
+        <!-- Summary text displayed here -->
+    </div>
+
+    <div class="container2">
+        <h2>Understanding Shark Attacks</h2>
+        <p>Shark attacks are a danger on beaches around the world, and in recent years attacks have been on the rise along coastlines possibly due to warmer water conditions, particularly along the east coast of the United States. By analyzing and understanding the patterns of these incidents, authorities can implement targeted prevention measures and allocate resources strategically. This project seeks to provide insights into the dynamics of shark attacks, demographic vulnerabilities, and activity-related risks, ultimately contributing to the development of proactive safety measures.</p>
+        <p>The focus on spatial and temporal patterns, along with demographic and activity analysis, provides a comprehensive framework for developing effective strategies to avoid shark attacks. By tailoring prevention measures based on these insights, authorities can enhance public safety, reduce the occurrence of incidents, and create a safer environment for individuals enjoying coastal activities.</p>
+        <p>The contribution of this project lies in its ability to analyze and interpret the existing data on shark attacks, providing insights into patterns and risk factors. By identifying high-risk areas, vulnerable demographics, and activities associated with a higher likelihood of shark encounters, the project aims to guide the development of proactive measures. Authorities can use these insights to allocate resources effectively, improve public awareness, and implement strategies that enhance coastal safety. This project seeks to empower decision-makers with actionable information to minimize the occurrence of shark attacks and create a safer environment for beachgoers.</p>
+        <h2>Notes</h2>
+        <p>When uploading a csv file, an example of the format would be:</p>
+        <img src="../static/bettercsvexample.JPG" alt="csv example" style="width: 800px;">
+        <p>When inputting data in custom input boxes, some data may not be available right away because some graphs won't show information unless there is a substantial amount of them. For example, it may take multiple submissions of a new activity for it to appear on the activities graph. Graphs like time of day, can have it's changes seen immediately.</p>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#graph-select').change(function() {
+                var selectedGraph = $(this).val();
+                $.ajax({
+                    url: selectedGraph,
+                    type: 'GET',
+                    success: function(data) {
+                        $('#graph-container').html(data.plot); // Update graph
+                        $('#summary-container').text(data.summary); // Update summary
+                    }
+                });
+            });
+
+            $('#upload-form, #add-data-form').submit(function(event) {
+                event.preventDefault();
+                var formData = new FormData($(this)[0]);
+                $.ajax({
+                    url: '/upload',
+                    type: 'POST',
+                    data: formData,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                        if (response.success) {
+                            var selectedGraph = $('#graph-select').val();
+                            $.ajax({
+                                url: selectedGraph,
+                                type: 'GET',
+                                success: function(data) {
+                                    $('#graph-container').html(data.plot); // Update graph
+                                    $('#summary-container').text(data.summary); // Update summary
+                                }
+                            });
+                        } else {
+                            alert(response.error);
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+}
+
+@keyframes gradientRotation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+.container2 {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    animation: gradientRotation 10s infinite linear;
+    background: linear-gradient(-80deg, #1e5799, #2989d8);
+    background-size: 400% 400%;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.summary{
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    animation: gradientRotation 10s infinite linear;
+    background: linear-gradient(-80deg, #1e5799, #2989d8);
+    background-size: 400% 400%;
+    border-radius: 20px;
+}
+h1 {
+    color: #ffffff;
+    text-align: center;
+}
+h2 {
+    color: #adcde9;
+    text-align: center;
+}
+.shark {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background: linear-gradient(-40deg, #1e5799, #2989d8);
+    border-radius: 20px;
+    text-align: center;
+}
+p {
+    color: #ffffff;
+    line-height: 1.6;
+    text-align: justify;
+}
+header {
+    color: #fff;
+    text-align: center;
+    padding: 1rem 0;
+    animation: gradientRotation 10s infinite linear;
+    background: linear-gradient(-45deg, #1e5799, #2989d8);
+    background-size: 400% 400%;
+}
+
+.container {
+    display: flex;
+    margin: 2rem auto;
+    max-width: 1200px;
+}
+
+.sidebar {
+    flex: 0 0 10%;
+    padding: 1rem;
+    background-color: #fff;
+    border-right: 1px solid #ddd;
+    border-radius: 20px;
+    margin-left: -200px;
+}
+
+.sidebar label {
+    display: block;
+    margin-bottom: .5rem;
+}
+
+#graph-container {
+    flex: 1;
+    padding: 1rem;
+    background-color: #fff;
+    border-left: 1px solid #ddd;
+    border-radius: 20px;
+    margin-left: 10px;
+}
+
+select {
+    color: #fff;
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    animation: gradientRotation 10s infinite linear;
+    background: linear-gradient(-80deg, #1e5799, #2989d8);
+    background-size: 400% 400%;
+}
+select option {
+    color: #fff; 
+    background-color: #1e5799;
+}
